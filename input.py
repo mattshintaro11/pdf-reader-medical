@@ -1,99 +1,83 @@
-from PyPDF2 import PdfReader, PdfWriter
-from typing import List, Dict
+from fillpdf import fillpdfs
+import json
+import os
+from datetime import datetime
 
-class PDFFormHandler:
-    def __init__(self, pdf_path: str):
-        """
-        Initialize PDF form handler with a PDF file path
+class MedicalFormSystem:
+    def __init__(self, template_path):
+        """Initialize with template PDF path"""
+        self.template_path = template_path
+        self.fields = self._get_form_fields()
         
-        Args:
-            pdf_path (str): Path to the PDF form file
-        """
-        self.pdf_path = pdf_path
-        self.reader = PdfReader(pdf_path)
-        
-    def get_form_fields(self) -> List[str]:
-        """
-        Get all form field names from the PDF
-        
-        Returns:
-            List[str]: List of form field names/labels
-        """
-        fields = []
-        
-        # Get form fields page by page
-        for page in self.reader.pages:
-            if '/Annots' in page:
-                for annotation in page['/Annots']:
-                    if annotation.get_object()['/Subtype'] == '/Widget':
-                        field_name = annotation.get_object().get('/T')
-                        if field_name:
-                            # Remove any parentheses and decode if needed
-                            if isinstance(field_name, bytes):
-                                field_name = field_name.decode('utf-8')
-                            fields.append(field_name)
-        
-        return fields
+    def _get_form_fields(self):
+        """Get all fillable fields from the template"""
+        return fillpdfs.get_form_fields(self.template_path)
     
-    def fill_form(self, data: Dict[str, str], output_path: str) -> bool:
-        """
-        Fill the PDF form with provided data and save to a new file
+    def create_patient_form(self, patient_data, output_dir="filled_forms"):
+        """Fill form with patient data and save it"""
+        # Create output directory if it doesn't exist
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+            
+        # Generate filename using patient name and date
+        filename = f"{patient_data['Apellido Paterno']}_{patient_data['Nombre(s)']}"
+        filename = f"{filename}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+        output_path = os.path.join(output_dir, filename)
         
-        Args:
-            data (Dict[str, str]): Dictionary mapping field names to values
-            output_path (str): Path where to save the filled PDF
-            
-        Returns:
-            bool: True if successful, False otherwise
-        """
-        try:
-            # Create a PDF writer
-            writer = PdfWriter()
-            
-            # Copy all pages from the template
-            for page in self.reader.pages:
-                writer.add_page(page)
-            
-            # Update form fields with the provided data
-            writer.update_page_form_field_values(
-                writer.pages[0],  # Update first page
-                data
-            )
-            
-            # Save the filled form
-            with open(output_path, 'wb') as output_file:
-                writer.write(output_file)
-            
-            return True
-            
-        except Exception as e:
-            print(f"Error filling form: {str(e)}")
-            return False
+        # Fill and save the form
+        fillpdfs.write_fillable_pdf(self.template_path, output_path, patient_data)
+        return output_path
 
-def main():
-    """Example usage of the PDFFormHandler class"""
-    
-    # Initialize handler with your PDF
-    pdf_handler = PDFFormHandler("sample_form.pdf")
-    
-    # Get all form fields
-    fields = pdf_handler.get_form_fields()
-    print("Form fields found:", fields)
-    
-    # Example data to fill in the form
-    sample_data = {
-        "Name": "John Doe",
-        "Age": "30",
-        "Experience": "5 years in software development",
-        "Education": "Bachelor's in Computer Science"
+def process_patient(form_system):
+    """Interactive function to get patient data and create form"""
+    print("\nEnter patient information:")
+    patient_data = {
+        "Apellido Paterno": input("Apellido Paterno: "),
+        "Apellido Materno": input("Apellido Materno: "),
+        "Nombre(s)": input("Nombre(s): "),
+        "Edad": input("Edad: "),
+        "Sexo": input("Sexo (M/H): ").upper()
     }
     
-    # Fill the form and save
-    success = pdf_handler.fill_form(sample_data, "filled_form.pdf")
-    if success:
-        print("Form filled successfully!")
-    else:
-        print("Error filling form.")
+    # Additional medical history
+    print("\nHistoria clínica:")
+    history_options = [
+        "Cardiacos", "Hipertensivos", "Diabetes Mellitus", 
+        "VIH/SIDA", "Cáncer", "Hepáticos", "Convulsivos"
+    ]
+    
+    for condition in history_options:
+        if input(f"¿{condition}? (s/n): ").lower() == 's':
+            patient_data[condition] = "Yes"
+    
+    # Create the filled form
+    output_path = form_system.create_patient_form(patient_data)
+    print(f"\nForm created successfully: {output_path}")
+    return output_path
+
+def main():
+    # Initialize system with template form
+    template_path = "medical_form.pdf"  # Change this to your template path
+    print("Initializing Medical Form System...")
+    
+    try:
+        form_system = MedicalFormSystem(template_path)
+        print("System initialized successfully!")
+        
+        while True:
+            print("\n1. Process new patient")
+            print("2. Exit")
+            choice = input("\nSelect option (1-2): ")
+            
+            if choice == "1":
+                process_patient(form_system)
+            elif choice == "2":
+                break
+            else:
+                print("Invalid option. Please try again.")
+    
+    except Exception as e:
+        print(f"Error: {str(e)}")
 
 if __name__ == "__main__":
     main()
