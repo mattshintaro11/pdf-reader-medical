@@ -1,454 +1,123 @@
 {
-  "indicaciones": {
-    "este_formato_deber_ser_llenado_a_una_sola_tinta_con_letra_legible_y_deber_tener_firma_aut_grafa_del_m_dico_tratante": "",
-    "es_necesario_llenar_el_formato_en_su_totalidad_y_proporcionar_informaci_n_completa_y_detallada_no_ser_v_lido_con_tachaduras_enmendaduras_y": "",
-    "de_lo_declarado_no_se_aceptan_cambios_posteriores": "",
-    "por_el_hecho_de_proporcionar_este_formato_seguros_monterrey_new_york_life_s_a_de_c_v_no_queda_obligada_a_admitir_la_validez_de_la": "",
-    "reclamaci_n_ni_a_renunciar_a_los_derechos_que_se_reserva_conforme_a_la_p_liza": "",
-    "detalle_todas_las_patolog_as_fecha_de_inicio_y_o_tiempo_de_evoluci_n_tratamientos_y_en_caso_de_cirug_as_la_fecha_de_realizaci_n": ""
-  },
-  "vih_sida": {
-    "d_a_mes_a_o_del_padecimiento": "",
-    "1": "",
-    "2": "",
-    "3": "",
-    "tables": {
-      "table_1": [
-        [
-          "",
-          "1 / 2"
-        ],
-        [
-          "1 / 2\nFormato de Informe Médico",
-          "1 / 2"
-        ]
-      ],
-      "table_2": [
-        [
-          "Datos del Asegurado (persona que recibe la atención médica)",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Apellido Paterno",
-          "",
-          "Apellido Materno",
-          "Nombre(s)",
-          "",
-          "",
-          "",
-          "Sexo M H",
-          "Edad"
-        ],
-        [
-          "Tipo de evento Accidente Enfermedad Embarazo",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Historia clínica",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Detalle todas las patologías, fecha de inicio y/o tiempo de evolución; tratamientos y en caso de cirugías, la fecha de realización.\nAntecedentes personales patológicos Antecedentes personales no patológicos\n¿Fuma? (cantidad)\nCardiacos\nHipertensivos ¿Consume bebidas alcohólicas (tipo y cantidad)\nDiabetes Mellitus\n¿Consume o ha consumido drogas? (tipo y cantidad)\nVIH/SIDA\n¿Pérdida no intencional de peso? (cantidad)\nCáncer\nHepáticos Perinatales (en caso necesario)\nConvulsivos\nGineco-obstétricos (cuando aplique)\nCirugía(s)\nOtros\nOtros",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Antecedentes personales patológicos",
-          "",
-          "",
-          "",
-          "",
-          "Antecedentes personales no patológicos",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Cardiacos",
-          "",
-          "",
-          "",
-          "",
-          "¿Fuma? (cantidad)",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Hipertensivos",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "¿Consume bebidas alcohólicas (tipo y cantidad)",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Diabetes Mellitus",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "VIH/SIDA",
-          "",
-          "",
-          "",
-          "",
-          "¿Consume o ha consumido drogas? (tipo y cantidad)",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Cáncer",
-          "",
-          "",
-          "",
-          "",
-          "¿Pérdida no intencional de peso? (cantidad)",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Hepáticos",
-          "",
-          "",
-          "",
-          "",
-          "Perinatales (en caso necesario)",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Convulsivos",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "Gineco-obstétricos (cuando aplique)",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Cirugía(s)",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "Otros",
-          "",
-          ""
-        ],
-        [
-          "",
-          "Otros",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "P a decimiento actual",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Fecha de primeros síntomas del padecimiento",
-          "",
-          "",
-          "",
-          "Día Mes Año",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Fecha de la primera consulta por este padecimiento",
-          "",
-          "",
-          "",
-          "Día Mes Año",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Fecha de diagnóstico de este padecimiento",
-          "",
-          "",
-          "",
-          "Día Mes Año",
-          "",
-          "",
-          "",
-          ""
-        ]
-      ],
-      "table_3": [
-        [
-          "Diagnóstico(s)"
-        ],
-        [
-          "1."
-        ],
-        [
-          "2."
-        ],
-        [
-          "3."
-        ],
-        [
-          "Tipo de padecimiento"
-        ],
-        [
-          "Congénito Agudo Adquirido Crónico\n¿Cuánto tiempo?\nTiene relación con otro padecimiento? Sí No ¿Cuál?\n¿El padecimiento ocasionó discapacidad? Sí No Parcial Total\nDesde Hasta\n¿Continuará recibiendo tratamiento en el futuro? Sí No\nFavor de especificar\nNombre y firma del médico tratante"
-        ]
-      ]
+  "fields": [
+    {
+      "label": "apellido_paterno_apellido_materno_nombre",
+      "type": "text",
+      "value": "Sexo M H Edad"
+    },
+    {
+      "label": "cirugía",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "datos_del_asegurado",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "diagnóstico",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "en_caso_de_programar_un_tratamiento_favor_de_indicar_nombre",
+      "type": "text",
+      "value": "y especialidad del(los) médico(s) que participa(n) y su"
+    },
+    {
+      "label": "exploración_física_y_resultados_de_estudios_relevantes_realizados",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "favor_de_indicar",
+      "type": "text",
+      "value": "Favor de indicar:"
+    },
+    {
+      "label": "fecha",
+      "type": "date",
+      "value": null
+    },
+    {
+      "label": "gineco-obstétricos",
+      "type": "date",
+      "value": null
+    },
+    {
+      "label": "hepáticos_perinatales",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "hipertensivos_¿consume_bebidas_alcohólicas",
+      "type": "number",
+      "value": null
+    },
+    {
+      "label": "indicaciones",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "nombre",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "otro",
+      "type": "text",
+      "value": "médico(s)"
+    },
+    {
+      "label": "perinatales",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "presupuesto_de_honorarios",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "t_ipo_de_e_stancia",
+      "type": "date",
+      "value": null
+    },
+    {
+      "label": "teléfonos_del_consultorio",
+      "type": "text",
+      "value": ""
+    },
+    {
+      "label": "tratamiento_quirúrgico",
+      "type": "text",
+      "value": "Programación de tratamiento"
+    },
+    {
+      "label": "¿consume_bebidas_alcohólicas",
+      "type": "number",
+      "value": null
+    },
+    {
+      "label": "¿consume_o_ha_consumido_drogas?",
+      "type": "number",
+      "value": null
+    },
+    {
+      "label": "¿fuma?",
+      "type": "number",
+      "value": null
+    },
+    {
+      "label": "¿pérdida_no_intencional_de_peso?",
+      "type": "number",
+      "value": null
     }
-  },
-  "favor_de_indicar_favor_de_indicar": {
-    "t_ipo_de_e_stancia": "Fecha de egreso",
-    "tel_fonos_del_consultorio_incluir_lada_tel": "móvil"
-  },
-  "presupuesto_de_honorarios": {
-    "el_llenado_de_este_formato_no_obliga_a_seguros_monterrey_new_york_life_s": "A. de C.V., a asumir la obligación de realizar pagos",
-    "de_gastos_improcedentes": "",
-    "seguros_monterrey_new_york_life_s": "A. de C.V.",
-    "como_m_dico_tratante_me_comprometo_a_hacer_del_conocimiento_a_seguros_monterrey_new_york_life_s": "A. de C.V., todos los",
-    "informes_que_se_refieran_a_la_salud_del_paciente_en_caso_de_requerirlos": "",
-    "convenio_con_seguros_monterrey_new_york_life_s": "A de C.V? en convenio con Seguros Monterrey New York Life, S.A de C.V.",
-    "fecha": "___/___/______",
-    "comisi_n_nacional_de_seguros_y_fianzas_a_partir_del_d_a_02_de_abril_de_2019_con_n_mero_cgen_s0038_0020_2019": "",
-    "tables": {
-      "table_1": [
-        [
-          "Exploración física y resultados de estudios relevantes realizados (favor de anexar interpretaciones que confirmen diagnóstico)",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "Talla",
-          "",
-          "",
-          "Peso"
-        ],
-        [
-          "Tratamiento",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Favor de indicar: Favor de indicar:\nTratamiento quirúrgico (favor de especificar procedimiento) Programación de tratamiento\nTratamiento médico (favor de describir tratamiento, dosificación Descripción de tratamiento ya realizado\ny fecha de inicio)\nDescripción\n¿Hubo complicaciones? Sí No\nFavor de especificar complicaciones",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Nombre del hospital",
-          "",
-          "Ciudad",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "Fecha de ingreso\nDía Mes Año",
-          ""
-        ],
-        [
-          "T ipo de e stancia:\nUrgencia Hospitalización Corta estancia / Ambulatoria",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "Fecha de egreso\nDía Mes Año",
-          ""
-        ],
-        [
-          "Datos generales del médico tratante",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Apellido Paterno",
-          "Apellido Materno",
-          "",
-          "Nombre(s)",
-          "",
-          "",
-          "",
-          "Nº de proveedor",
-          "",
-          ""
-        ],
-        [
-          "RFC",
-          "",
-          "Especialidad",
-          "",
-          "",
-          "Cédula profesional",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Cédula de especialidad/Certificación",
-          "",
-          "",
-          "Correo electrónico",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "Teléfonos del consultorio (incluir LADA)",
-          "",
-          "",
-          "",
-          "Tel. móvil",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ],
-        [
-          "En caso de programar un tratamiento favor de indicar nombre(s) y especialidad del(los) médico(s) que participa(n) y su\npresupuesto de honorarios:\nAnestesiólogo\nPrimer ayudante\nSegundo ayudante\nOtro(s) médico(s)\nEl llenado de este formato no obliga a Seguros Monterrey New York Life, S.A. de C.V., a asumir la obligación de realizar pagos\nde gastos improcedentes.\nSe le informa que la inexacta o falsa declaración proporcionada en este formato, releva de toda responsabilidad a\nSeguros Monterrey New York Life, S.A. de C.V.\nComo médico tratante me comprometo a hacer del conocimiento a Seguros Monterrey New York Life, S.A. de C.V., todos los\ninformes que se refieran a la salud del paciente en caso de requerirlos.\n¿Pertenece a los prestadores de servicios médicos en En caso de no pertenecer a los prestadores de servicios médicos\nconvenio con Seguros Monterrey New York Life, S.A de C.V? en convenio con Seguros Monterrey New York Life, S.A de C.V.\n¿Acepta el tabulador de esta para el pago de honorarios?\nSí No\nSí No\nFecha:___/___/______\ndía mes año Nombre y firma del médico tratante",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          "",
-          ""
-        ]
-      ]
-    }
+  ],
+  "metadata": {
+    "total_pages": 2,
+    "form_name": "Formato de Informe Médico"
   }
 }

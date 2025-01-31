@@ -1,182 +1,182 @@
 import pdfplumber
 import json
 import re
-from typing import Dict, List, Any, Tuple
+from typing import Dict, List, Any, Optional
 import logging
 
-class PDFFormExtractor:
+class GenericPDFFormExtractor:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         logging.basicConfig(level=logging.INFO)
-        
-    def detect_form_fields(self, text_line: str) -> Tuple[str, str]:
+
+    def detect_form_field(self, text: str) -> Optional[Dict[str, Any]]:
         """
-        Detect if a line contains a form field and extract the field name.
-        
-        Args:
-            text_line (str): Line of text from the PDF
-            
-        Returns:
-            Tuple[str, str]: Field name and default value (empty string if not found)
+        Detect form fields in text using various patterns.
+        Returns field info if found, None otherwise.
         """
-        # Common patterns for form fields
         patterns = [
-            # Pattern for fields ending with colon
-            r'^([^:]+):(.*)$',
-            # Pattern for fields ending with equals
-            r'^([^=]+)=(.*)$',
-            # Pattern for fields with checkbox or radio indicators
-            r'^(?:\[ \]|\( \))\s*(.+?)(?:\s*:)?$',
-            # Pattern for numbered fields
-            r'^\d+\.\s*([^:]+):?(.*)$',
-            # Pattern for fields with underscores or dots indicating fill-in areas
-            r'^([^_\.]+)[_\.]+(.*)$'
+            # Field with colon (Label: _______)
+            r'^([^:]+):\s*(?:_{3,}|\[_{3,}\]|\(\s*\)|□)?(.*)$',
+            # Field with equals (Label = ______)
+            r'^([^=]+)=\s*(?:_{3,}|\[_{3,}\]|\(\s*\)|□)?(.*)$',
+            # Checkbox or radio style ([ ] Label or □ Label)
+            r'^(?:\[ \]|□)\s*([^:]+)(?:\s*:\s*(.*))?$',
+            # Underlined field (Label _____)
+            r'^([^_]+)_{3,}(.*)$',
+            # Numbered field (1. Label: _____)
+            r'^\d+\.\s*([^:]+):\s*(.*)$',
+            # Field with parentheses (Label (____))
+            r'^([^(]+)\s*\([^)]*\)\s*:?(.*)$'
         ]
-        
+
         for pattern in patterns:
-            match = re.match(pattern, text_line.strip())
+            match = re.match(pattern, text.strip())
             if match:
-                field_name = match.group(1).strip()
-                default_value = match.group(2).strip() if len(match.groups()) > 1 else ""
-                # Clean up field name
-                field_name = re.sub(r'[\[\]\(\)\{\}]', '', field_name)
-                field_name = field_name.strip()
-                return field_name, default_value
+                label = match.group(1).strip()
+                value = match.group(2).strip() if len(match.groups()) > 1 else ""
                 
-        return None, None
+                # Clean up the label
+                label = re.sub(r'[\[\]\(\)□]', '', label)
+                label = re.sub(r'\s+', '_', label.strip().lower())
+                
+                # Determine field type
+                field_type = self.determine_field_type(text, value)
+                
+                return {
+                    "label": label,
+                    "type": field_type,
+                    "value": value if field_type == "text" else False if field_type == "checkbox" else None
+                }
+        return None
 
-    def clean_field_name(self, field_name: str) -> str:
+    def determine_field_type(self, text: str, value: str) -> str:
         """
-        Convert field name to a valid JSON key.
-        
-        Args:
-            field_name (str): Original field name
-            
-        Returns:
-            str: Cleaned field name suitable for JSON
+        Determine the type of form field based on its appearance.
         """
-        if not field_name:
-            return ""
-            
-        # Replace special characters and spaces with underscores
-        clean_name = re.sub(r'[^a-zA-Z0-9_]', '_', field_name.lower())
-        # Remove multiple consecutive underscores
-        clean_name = re.sub(r'_+', '_', clean_name)
-        # Remove leading/trailing underscores
-        clean_name = clean_name.strip('_')
-        return clean_name
+        # Check for checkbox/radio patterns
+        if re.search(r'(?:\[ \]|□|\(\s*\))', text):
+            return "checkbox"
+        # Check for date field patterns
+        elif re.search(r'(?:fecha|date|día|mes|año|/|-)', text.lower()):
+            return "date"
+        # Check for numeric field patterns
+        elif re.search(r'(?:cantidad|número|monto|total|\d+)', text.lower()):
+            return "number"
+        # Default to text
+        return "text"
 
-    def detect_checkboxes(self, text: str) -> List[str]:
+    def process_table(self, table: List[List[str]]) -> List[Dict[str, Any]]:
         """
-        Detect checkbox options in text.
-        
-        Args:
-            text (str): Text containing checkbox options
-            
-        Returns:
-            List[str]: List of checkbox option labels
+        Process a table and extract form fields from it.
         """
-        checkbox_patterns = [
-            r'(?:\[ \]|\( \))\s*([^\n\[\]\(\)]+)',  # Common checkbox patterns
-            r'□\s*([^\n□]+)',                        # Unicode checkbox
-            r'○\s*([^\n○]+)',                        # Unicode circle
-        ]
+        fields = []
+        headers = []
         
-        checkboxes = []
-        for pattern in checkbox_patterns:
-            matches = re.finditer(pattern, text)
-            checkboxes.extend(match.group(1).strip() for match in matches)
-        return checkboxes
+        for row in table:
+            if not row or not any(cell for cell in row):
+                continue
+                
+            # Try to detect if this is a header row
+            if all(cell and isinstance(cell, str) and cell.strip() for cell in row):
+                headers = [self.clean_header(cell) for cell in row]
+                continue
+                
+            # Process regular rows
+            for i, cell in enumerate(row):
+                if not cell:
+                    continue
+                    
+                field = self.detect_form_field(str(cell))
+                if field:
+                    # Add header context if available
+                    if headers and i < len(headers):
+                        field["section"] = headers[i]
+                    fields.append(field)
+                
+        return fields
+
+    def clean_header(self, header: str) -> str:
+        """
+        Clean and normalize header text.
+        """
+        header = re.sub(r'[^\w\s]', '', header.lower())
+        return re.sub(r'\s+', '_', header.strip())
 
     def extract_form_fields(self, pdf_path: str) -> Dict[str, Any]:
         """
         Extract form fields from a PDF file.
-        
-        Args:
-            pdf_path (str): Path to the PDF file
-            
-        Returns:
-            Dict[str, Any]: Dictionary containing form fields and their default values
         """
-        form_data = {}
-        current_section = None
+        form_structure = {
+            "fields": [],
+            "metadata": {
+                "total_pages": 0,
+                "form_name": ""
+            }
+        }
         
         try:
             with pdfplumber.open(pdf_path) as pdf:
+                form_structure["metadata"]["total_pages"] = len(pdf.pages)
+                
                 for page_num, page in enumerate(pdf.pages, 1):
                     self.logger.info(f"Processing page {page_num}")
                     
-                    # Extract text and handle potential encoding issues
+                    # Extract text
                     text = page.extract_text() or ""
                     
-                    # Process each line
+                    # Try to detect form name from first page
+                    if page_num == 1:
+                        first_lines = text.split('\n')[:3]  # Check first 3 lines
+                        for line in first_lines:
+                            if re.search(r'(?:form|formato|formulario)', line.lower()):
+                                form_structure["metadata"]["form_name"] = line.strip()
+                                break
+                    
+                    # Process tables
+                    tables = page.extract_tables()
+                    for table in tables:
+                        fields = self.process_table(table)
+                        form_structure["fields"].extend(fields)
+                    
+                    # Process text lines
                     for line in text.split('\n'):
                         line = line.strip()
                         if not line:
                             continue
                             
-                        # Check if this is a section header
-                        if line.isupper() or (len(line) > 3 and line.endswith(':')):
-                            current_section = self.clean_field_name(line)
-                            if current_section:
-                                form_data[current_section] = {}
-                            continue
-                            
-                        # Detect form fields
-                        field_name, default_value = self.detect_form_fields(line)
-                        if field_name:
-                            clean_name = self.clean_field_name(field_name)
-                            if current_section and clean_name:
-                                form_data[current_section][clean_name] = default_value
-                            elif clean_name:
-                                form_data[clean_name] = default_value
-                                
-                        # Detect checkboxes
-                        checkboxes = self.detect_checkboxes(line)
-                        if checkboxes:
-                            checkbox_group = f"checkbox_group_{len(form_data)}"
-                            if current_section:
-                                if 'checkboxes' not in form_data[current_section]:
-                                    form_data[current_section]['checkboxes'] = {}
-                                form_data[current_section]['checkboxes'][checkbox_group] = {
-                                    self.clean_field_name(box): False for box in checkboxes
-                                }
-                            else:
-                                form_data[checkbox_group] = {
-                                    self.clean_field_name(box): False for box in checkboxes
-                                }
-                    
-                    # Look for tables
-                    tables = page.extract_tables()
-                    if tables:
-                        for table_num, table in enumerate(tables, 1):
-                            if table and any(any(cell for cell in row) for row in table):
-                                table_data = []
-                                for row in table:
-                                    if row and any(cell for cell in row):
-                                        row_data = [str(cell).strip() if cell else "" for cell in row]
-                                        table_data.append(row_data)
-                                
-                                if current_section:
-                                    if 'tables' not in form_data[current_section]:
-                                        form_data[current_section]['tables'] = {}
-                                    form_data[current_section]['tables'][f'table_{table_num}'] = table_data
-                                else:
-                                    form_data[f'table_{table_num}'] = table_data
+                        field = self.detect_form_field(line)
+                        if field:
+                            form_structure["fields"].append(field)
             
-            return form_data
+            # Clean up and organize fields
+            form_structure["fields"] = self.organize_fields(form_structure["fields"])
+            
+            return form_structure
             
         except Exception as e:
             self.logger.error(f"Error processing PDF: {str(e)}")
             raise
 
+    def organize_fields(self, fields: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Organize and deduplicate fields.
+        """
+        # Remove duplicates while preserving order
+        seen = set()
+        unique_fields = []
+        
+        for field in fields:
+            field_key = f"{field['label']}_{field['type']}"
+            if field_key not in seen:
+                seen.add(field_key)
+                unique_fields.append(field)
+        
+        # Sort fields by label for consistency
+        return sorted(unique_fields, key=lambda x: x['label'])
+
     def save_json_template(self, form_data: Dict[str, Any], output_path: str) -> None:
         """
-        Save the extracted form data as a JSON file.
-        
-        Args:
-            form_data (Dict[str, Any]): The extracted form data
-            output_path (str): Path where to save the JSON file
+        Save the form data as a JSON file.
         """
         try:
             with open(output_path, 'w', encoding='utf-8') as f:
@@ -192,14 +192,14 @@ def main():
     """
     import argparse
     
-    parser = argparse.ArgumentParser(description='Extract form fields from a PDF file')
+    parser = argparse.ArgumentParser(description='Extract form fields from any PDF file')
     parser.add_argument('pdf_path', help='Path to the PDF file')
     parser.add_argument('--output', '-o', default='form_template.json',
                        help='Output JSON file path (default: form_template.json)')
     
     args = parser.parse_args()
     
-    extractor = PDFFormExtractor()
+    extractor = GenericPDFFormExtractor()
     try:
         form_data = extractor.extract_form_fields(args.pdf_path)
         extractor.save_json_template(form_data, args.output)
