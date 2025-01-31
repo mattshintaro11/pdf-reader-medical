@@ -1,119 +1,234 @@
 {
   "fields": [
     {
-      "label": "apellido_paterno_apellido_materno_nombre",
-      "type": "text",
-      "value": "Sexo M H Edad"
-    },
-    {
-      "label": "cirugía",
-      "type": "text",
+      "label": "indicaciones",
+      "type": "section",
       "value": ""
     },
     {
-      "label": "datos_del_asegurado",
+      "label": "persona_que_recibe_la_atención_médica",
       "type": "text",
+      "value": "",
+      "section": "indicaciones"
+    },
+    {
+      "label": "s",
+      "type": "text",
+      "value": "",
+      "section": "indicaciones"
+    },
+    {
+      "label": "cantidad",
+      "type": "number",
+      "value": null,
+      "section": "indicaciones"
+    },
+    {
+      "label": "tipo_y_cantidad",
+      "type": "number",
+      "value": null,
+      "section": "indicaciones"
+    },
+    {
+      "label": "vih_sida",
+      "type": "section",
       "value": ""
     },
     {
-      "label": "diagnóstico",
+      "label": "cantidad",
+      "type": "number",
+      "value": null,
+      "section": "vih_sida"
+    },
+    {
+      "label": "en_caso_necesario",
       "type": "text",
+      "value": "",
+      "section": "vih_sida"
+    },
+    {
+      "label": "cuando_aplique",
+      "type": "text",
+      "value": "",
+      "section": "vih_sida"
+    },
+    {
+      "label": "s",
+      "type": "text",
+      "value": "",
+      "section": "vih_sida"
+    },
+    {
+      "label": "y_firma_del_médico_tratante",
+      "type": "text",
+      "value": "",
+      "section": "vih_sida"
+    },
+    {
+      "label": "persona_que_recibe_la_atención_médica",
+      "type": "text",
+      "value": "",
+      "section": "vih_sida"
+    },
+    {
+      "label": "tipo_y_cantidad",
+      "type": "number",
+      "value": null,
+      "section": "vih_sida"
+    },
+    {
+      "label": "favor_de_anexar_interpretaciones_que_confirmen_diagnóstico",
+      "type": "text",
+      "value": "",
+      "section": "vih_sida"
+    },
+    {
+      "label": "favor_de_indicar_favor_de_indicar",
+      "type": "section",
       "value": ""
     },
     {
-      "label": "en_caso_de_programar_un_tratamiento_favor_de_indicar_nombre",
+      "label": "favor_de_especificar_procedimiento",
       "type": "text",
-      "value": "y especialidad del(los) médico(s) que participa(n) y su"
+      "value": "",
+      "section": "favor_de_indicar_favor_de_indicar"
     },
     {
-      "label": "exploración_física_y_resultados_de_estudios_relevantes_realizados",
+      "label": "del_hospital_ciudad_fecha_de_ingreso",
+      "type": "date",
+      "value": null,
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "t_ipo_de_e_stancia",
       "type": "text",
+      "value": "Fecha de egreso",
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "s",
+      "type": "text",
+      "value": "",
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "electrónico",
+      "type": "text",
+      "value": "",
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "incluir_lada",
+      "type": "text",
+      "value": "",
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "los",
+      "type": "text",
+      "value": "",
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "n",
+      "type": "text",
+      "value": "",
+      "section": "favor_de_indicar_favor_de_indicar"
+    },
+    {
+      "label": "presupuesto_de_honorarios",
+      "type": "section",
       "value": ""
     },
     {
-      "label": "favor_de_indicar",
+      "label": "s",
       "type": "text",
-      "value": "Favor de indicar:"
+      "value": "",
+      "section": "presupuesto_de_honorarios"
     },
     {
       "label": "fecha",
       "type": "date",
-      "value": null
+      "value": null,
+      "section": "presupuesto_de_honorarios"
     },
     {
-      "label": "gineco-obstétricos",
+      "label": "",
+      "type": "text",
+      "value": "",
+      "section": "presupuesto_de_honorarios"
+    },
+    {
+      "label": "y_firma_del_médico_tratante",
+      "type": "text",
+      "value": "",
+      "section": "presupuesto_de_honorarios"
+    },
+    {
+      "label": "favor_de_anexar_interpretaciones_que_confirmen_diagnóstico",
+      "type": "text",
+      "value": "",
+      "section": "presupuesto_de_honorarios"
+    },
+    {
+      "label": "favor_de_indicar",
+      "type": "text",
+      "value": "Favor de indicar:",
+      "section": "presupuesto_de_honorarios"
+    },
+    {
+      "label": "favor_de_especificar_procedimiento",
+      "type": "text",
+      "value": "",
+      "section": "presupuesto_de_honorarios"
+    },
+    {
+      "label": "favor_de_describir_tratamiento_dosificación_descripción_de_tratamiento_ya_realizado_y_fecha_de_inicio",
       "type": "date",
-      "value": null
+      "value": null,
+      "section": "presupuesto_de_honorarios"
     },
     {
-      "label": "hepáticos_perinatales",
+      "label": "del_hospital_ciudad_fecha_de_ingreso",
+      "type": "date",
+      "value": null,
+      "section": "presupuesto_de_honorarios"
+    },
+    {
+      "label": "t_ipo_de_e_stancia",
       "type": "text",
-      "value": ""
+      "value": "Urgencia Hospitalización Corta estancia / Ambulatoria Fecha de egreso",
+      "section": "presupuesto_de_honorarios"
     },
     {
-      "label": "hipertensivos_¿consume_bebidas_alcohólicas",
-      "type": "number",
-      "value": null
-    },
-    {
-      "label": "indicaciones",
+      "label": "electrónico",
       "type": "text",
-      "value": ""
+      "value": "",
+      "section": "presupuesto_de_honorarios"
     },
     {
-      "label": "nombre",
+      "label": "incluir_lada",
       "type": "text",
-      "value": ""
-    },
-    {
-      "label": "otro",
-      "type": "text",
-      "value": "médico(s)"
-    },
-    {
-      "label": "perinatales",
-      "type": "text",
-      "value": ""
+      "value": "",
+      "section": "presupuesto_de_honorarios"
     },
     {
       "label": "presupuesto_de_honorarios",
       "type": "text",
-      "value": ""
+      "value": "Anestesiólogo",
+      "section": "presupuesto_de_honorarios"
     },
     {
-      "label": "t_ipo_de_e_stancia",
-      "type": "date",
-      "value": null
-    },
-    {
-      "label": "teléfonos_del_consultorio",
+      "label": "los",
       "type": "text",
-      "value": ""
+      "value": "",
+      "section": "presupuesto_de_honorarios"
     },
     {
-      "label": "tratamiento_quirúrgico",
+      "label": "n",
       "type": "text",
-      "value": "Programación de tratamiento"
-    },
-    {
-      "label": "¿consume_bebidas_alcohólicas",
-      "type": "number",
-      "value": null
-    },
-    {
-      "label": "¿consume_o_ha_consumido_drogas?",
-      "type": "number",
-      "value": null
-    },
-    {
-      "label": "¿fuma?",
-      "type": "number",
-      "value": null
-    },
-    {
-      "label": "¿pérdida_no_intencional_de_peso?",
-      "type": "number",
-      "value": null
+      "value": "",
+      "section": "presupuesto_de_honorarios"
     }
   ],
   "metadata": {
